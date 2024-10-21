@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: Message Polling Service Kafka
+
+  datasource:
+    url: jdbc:postgresql://localhost:5431/outbox_db
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+    consumer:
+      group-id: batuhan-toy
+      bootstrap-servers: localhost:9092
+server:
+  port: 8091
+  servlet:
+    context-path: "/api/v1"
+
