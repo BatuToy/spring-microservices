@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: gateway-demo
+server:
+  port: 9000
+  servlet:
+    context-path: /gateway

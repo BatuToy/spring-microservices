@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: get-post-by-id
+          uri: https://jsonplaceholder.typicode.com
+          predicates:
+            - Path=/demo/{id}
+            - Host=**.post.com
+          filters:
+            - SetPath=/posts
+            - SetStatus=202
+            - AddRequestParameter=id, {id}
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallBackUri: http://localhost:9001/fallback
+
+        - id: get-all-todos
+          uri: https://jsonplaceholder.typicode.com
+          predicates:
+            - Path=/demo
+            - Host=**.todo.com
+          filters:
+            - SetPath=/todos
+            - SetStatus=202
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallBackUri: forward:/fallback
+
+        - id: dummy
+          uri: http://localhost:9002
+          predicates:
+            - Path=/dummy
+            - Host=**.dummy.com
+          filters:
+            - SetPath=/get
+            - SetStatus=204
+            - AddRequestHeader=Author, Batuhan
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/fallback
+
+server:
+  port: 9001
