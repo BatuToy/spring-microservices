@@ -35,11 +35,11 @@ public class PollServiceImpl implements PollService {
         Map<String, Object> kafkaConfigs = new HashMap<>();
         kafkaConfigs.put(KafkaHeaders.TOPIC, TOPIC_NAME);
         kafkaConfigs.put(KafkaHeaders.KEY, "batuhan-toy-key");
-        unProcessedMessages.forEach( payload -> {
+        unProcessedMessages.forEach( outbox -> {
                try {
-                kafkaPublisher.sendMessage(new GenericMessage(payload.getPayload(), kafkaConfigs));
-                payload.setIsProcessed(true);
-                outboxRepository.save(payload);
+                kafkaPublisher.sendMessage(new GenericMessage(outbox.getPayload(), kafkaConfigs));
+                outbox.setIsProcessed(true);
+                outboxRepository.save(outbox);
                } catch (Exception e){
                     log.error("Message cannot be sent! \n Error:{}", e.getLocalizedMessage());
                }

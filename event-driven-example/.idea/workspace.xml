@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="80c96e15-cb38-45f6-972d-904fe25b8e33" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../outboxPattern/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/messaging/KafkaConsumerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/messaging/KafkaPublishConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/messaging/data/common/KafkaCommonDataConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/messaging/data/consumer/ConsumerConfigData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/messaging/data/producer/ProducerConfigData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/messaging/publish/KafkaPublish.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/messaging/publish/KafkaPublishImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/messaging/consume/Consumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/messaging/publish/KafkaPublishDummyDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../outboxPattern/outbox-pattern/src/main/java/com/b_toy/outbox_pattern/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../outboxPattern/outbox-pattern/src/main/java/com/b_toy/outbox_pattern/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../outboxPattern/outbox-pattern/src/main/java/com/b_toy/outbox_pattern/services/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../outboxPattern/outbox-pattern/src/main/java/com/b_toy/outbox_pattern/services/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../outboxPattern/poll-service/src/main/java/com/b_toy/outbox_pattern/poll_service/PollServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../outboxPattern/poll-service/src/main/java/com/b_toy/outbox_pattern/poll_service/PollServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../outboxPattern/poll-service/src/main/java/com/b_toy/outbox_pattern/poll_service/services/impl/PollServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../outboxPattern/poll-service/src/main/java/com/b_toy/outbox_pattern/poll_service/services/impl/PollServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/GatewayApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/GatewayApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/RestClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/restclient/RestClientConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/RouteConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/routes/RouteConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/interceptors/DummyInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/config/interceptors/DummyInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/dto/DummtDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/dto/DummyDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/rest/DummyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/rest/DummyClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/rest/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/java/com/dev/batu/gateway/rest/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/test/java/com/dev/batu/gateway/test/GatewayTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/src/test/java/com/dev/batu/gateway/test/GatewayTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/todo.md" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-cloud-gateway-demo/api-gateway-demo/todo.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;BatuToy&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/BatuToy/spring-microservices.git&quot;,
+    &quot;accountId&quot;: &quot;ccfc5a68-c7dd-40d3-9df3-9a3590579626&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="30E38FAhagbRLXkPx7lSCuwB35L" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/batu/Desktop/PROJECTS/spring-microservices/event-driven-example&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="80c96e15-cb38-45f6-972d-904fe25b8e33" name="Changes" comment="" />
+      <created>1753178743736</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753178743736</updated>
+      <workItem from="1753178744842" duration="224000" />
+      <workItem from="1753252560310" duration="34000" />
+      <workItem from="1753252953799" duration="18000" />
+      <workItem from="1753252989626" duration="32000" />
+      <workItem from="1753253030367" duration="62000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

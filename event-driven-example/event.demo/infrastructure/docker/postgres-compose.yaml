@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: event-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data

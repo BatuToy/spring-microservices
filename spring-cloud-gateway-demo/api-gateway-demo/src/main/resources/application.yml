@@ -35,15 +35,14 @@ spring:
           uri: http://localhost:9002
           predicates:
             - Path=/dummy
-            - Host=**.dummy.com
           filters:
             - SetPath=/get
             - SetStatus=204
-            - AddRequestHeader=Author, Batuhan
             - name: CircuitBreaker
               args:
                 name: myCircuitBreaker
                 fallbackUri: forward:/fallback
+
 
 server:
   port: 9001

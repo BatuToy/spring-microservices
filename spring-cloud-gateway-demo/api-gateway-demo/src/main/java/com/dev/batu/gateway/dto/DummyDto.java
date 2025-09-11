@@ -9,7 +9,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DummtDto {
+public class DummyDto {
     private final UUID id;
     private final String firstName;
 }

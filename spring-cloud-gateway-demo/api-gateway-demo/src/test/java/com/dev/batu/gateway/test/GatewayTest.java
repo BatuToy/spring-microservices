@@ -1,6 +1,6 @@
 package com.dev.batu.gateway.test;
 
-import com.dev.batu.gateway.dto.DummtDto;
+import com.dev.batu.gateway.dto.DummyDto;
 import com.dev.batu.gateway.dto.Todo;
 import com.dev.batu.gateway.rest.client.Client;
 
@@ -37,8 +37,8 @@ class GatewayTest {
 
     @Test
     void restCallToDummyApi(){
-        List<DummtDto> dummies = client.reqDummies();
-        List<UUID> dummyIds = dummies.stream().map(DummtDto::getId).toList();
+        List<DummyDto> dummies = client.reqDummies();
+        List<UUID> dummyIds = dummies.stream().map(DummyDto::getId).toList();
         log.info("Dum ids= {}", dummyIds);
         assertNotNull(dummies);
     }

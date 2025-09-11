@@ -19,6 +19,7 @@ public class DummyInterceptor implements ClientHttpRequestInterceptor {
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
         request.getHeaders().add("X-Request-ID", "2323");
         log.info(request.getURI().toString());
+        log.info(body.length);
         return execution.execute(request, body);
     }
 }

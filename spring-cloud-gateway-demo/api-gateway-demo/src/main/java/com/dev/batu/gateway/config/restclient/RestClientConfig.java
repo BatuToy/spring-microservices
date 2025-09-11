@@ -1,4 +1,4 @@
-package com.dev.batu.gateway.config;
+package com.dev.batu.gateway.config.restclient;
 
 
 import com.dev.batu.gateway.config.interceptors.DummyInterceptor;

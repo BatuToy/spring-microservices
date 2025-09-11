@@ -21,8 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OutboxRepository outboxRepository;
-    private final OrderToOutbox orderToOutbox;
     private final Mapper mapper;
+    
     @Transactional
     public OrderResponseDto createOrder(OrderRequestDto orderRequestDto) {
         Order order = mapper.map(orderRequestDto, Order.class);

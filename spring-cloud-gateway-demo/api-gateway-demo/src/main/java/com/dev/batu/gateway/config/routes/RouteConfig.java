@@ -1,12 +1,6 @@
-package com.dev.batu.gateway.config;
+package com.dev.batu.gateway.config.routes;
 
-import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-
-import java.net.URI;
 
 @Configuration
 public class RouteConfig {

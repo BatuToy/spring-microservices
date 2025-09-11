@@ -1,6 +1,6 @@
 package com.dev.batu.gateway.rest.client;
 
-import com.dev.batu.gateway.dto.DummtDto;
+import com.dev.batu.gateway.dto.DummyDto;
 import com.dev.batu.gateway.dto.Todo;
 import com.dev.batu.gateway.rest.DummyClient;
 import com.dev.batu.gateway.rest.TodosClient;
@@ -24,7 +24,7 @@ public class Client {
         return todosClient.todos();
     }
 
-    public List<DummtDto> reqDummies(){
+    public List<DummyDto> reqDummies(){
         return dummyClient.getDummies();
     }
 }

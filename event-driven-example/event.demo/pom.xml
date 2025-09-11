@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.3</version>
+		<relativePath/>
+	</parent>
+
+	<groupId>com.batu.micro</groupId>
+	<artifactId>event.demo</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>event.demo</name>
+
+	<description>Demo project for understanding the comm between modules in a monolith with event driven base !</description>
+	<modules>
+		<module>product</module>
+		<module>offer</module>
+		<module>cart</module>
+		<module>infrastructure</module>
+		<module>container</module>
+        <module>common</module>
+		<module>authentication</module>
+		<module>lib-job</module>
+	</modules>
+
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- CART MODULE -->
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>cart-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>cart-domain-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>cart-application</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>cart-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>cart-messaging</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- OFFER MODULE -->
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>offer-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>offer-domain-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>offer-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>offer-application</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>offer-messaging</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- PRODUCT MODULE -->
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>product-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>product-domain-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>product-application</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>product-messaging</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>product-persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>common-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.batu.micro</groupId>
+				<artifactId>infrastructure</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
