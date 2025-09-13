@@ -1,30 +1,31 @@
 package com.batu.demo.event;
 
 import com.batu.demo.mapper.ObjectMapperUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
+import java.util.UUID;
 
 public abstract class DomainEvent<T> {
 
     private final String id;
-    private final Integer version;
+
     private String payload;
 
-    protected DomainEvent(String id, Integer version, T payload) {
-        this.id = id;
-        this.version = version;
-        toPayload(payload);
+    protected DomainEvent(T payload) {
+        this.id = UUID.randomUUID().toString();
+        // todo -> Find a generic method for mapping not Order specific!
+        payloadToString(payload);
     }
 
-    private void toPayload(T o)  {
+    private void payloadToString(T o)  {
         this.payload = ObjectMapperUtil.toString(o);
+    }
+
+    public T stringToPayload(Class<T> clazz) {
+        return ObjectMapperUtil.toObject(this.payload, clazz);
     }
 
     public String getId() {
         return id;
-    }
-
-    public Integer getVersion() {
-        return version;
     }
 
     public String getPayload() {

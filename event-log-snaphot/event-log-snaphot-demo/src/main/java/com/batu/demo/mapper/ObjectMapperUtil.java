@@ -15,7 +15,8 @@ public class ObjectMapperUtil {
     }
 
     private static ObjectMapper omFactory() {
-        return new ObjectMapper();
+        final ObjectMapper om = new ObjectMapper();
+        return om;
     }
 
     public static <T> T toObject(String data, Class<T> clazz) {

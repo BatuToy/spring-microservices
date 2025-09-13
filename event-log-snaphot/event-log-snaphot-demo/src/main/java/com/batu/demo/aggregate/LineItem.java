@@ -11,7 +11,7 @@ public class LineItem {
     private final BigDecimal itemPrice;
     private final BigDecimal subTotalPrice;
 
-    LineItem(String productName, Integer quantity, BigDecimal itemPrice, BigDecimal subTotalPrice) {
+    public LineItem(String productName, Integer quantity, BigDecimal itemPrice, BigDecimal subTotalPrice) {
         this.productName = productName;
         this.quantity = quantity;
         this.itemPrice = itemPrice;
@@ -22,7 +22,7 @@ public class LineItem {
         return Objects.nonNull(this.quantity) &&
                 Objects.nonNull(this.itemPrice) &&
                 Objects.nonNull(this.subTotalPrice) &&
-                this.itemPrice.multiply(BigDecimal.valueOf(this.quantity)).equals(this.getItemPrice());
+                this.itemPrice.multiply(BigDecimal.valueOf(this.quantity)).equals(this.getSubTotalPrice());
     }
 
     public BigDecimal getItemPrice() {

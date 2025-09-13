@@ -4,13 +4,13 @@ import java.util.UUID;
 
 public class OrderId {
 
-    private final UUID orderId;
+    private final UUID val;
 
     public OrderId(UUID orderId) {
-        this.orderId = orderId;
+        this.val = orderId;
     }
 
-    public UUID getOrderId() {
-        return orderId;
+    public UUID getVal() {
+        return val;
     }
 }

@@ -1,7 +1,9 @@
 package com.batu.demo.aggregate;
 
 import com.batu.demo.event.LineItemAddedEvent;
+import com.batu.demo.event.OrderCreatedEvent;
 import com.batu.demo.event.OrderDeliveredEvent;
+import com.batu.demo.event.OrderPaidEvent;
 import com.batu.demo.exception.OrderAggregateException;
 
 import java.math.BigDecimal;
@@ -14,37 +16,41 @@ import java.util.UUID;
 public class OrderAggregate {
 
     private final OrderId orderId;
-    private List<LineItem> items;
-    private final BigDecimal totalPrice;
-    private Change<OrderAggregate> change;
+    private final Change<OrderAggregate> change;
 
+    private BigDecimal totalPrice;
+    private List<LineItem> items;
     private Status status;
 
-    public OrderAggregate(OrderId orderId, BigDecimal totalPrice) {
-        this.orderId = orderId;
+    public OrderAggregate(BigDecimal totalPrice) {
+        this.orderId = new OrderId(UUID.randomUUID());
         this.totalPrice = totalPrice;
+        this.status = Status.startProcess();
+        this.change = new Change<>();
+        change.addChange(new OrderCreatedEvent(this));
     }
 
-    public void addItems(List<LineItem> items) {
+    public void addItem(LineItem item) {
+        addItems(List.of(item));
+        change.addChange(new LineItemAddedEvent(this));
+    }
+
+    private void addItems(List<LineItem> items) {
         if(Objects.isNull(items) || items.isEmpty()) {
             throw new OrderAggregateException("Line items could not be null or empty !");
         }
-        if(this.items.isEmpty()) {
+        if(Objects.isNull(this.items) || this.items.isEmpty()) {
             this.items = new ArrayList<>();
             this.items.addAll(items);
         } else {
             this.items.addAll(items);
         }
+        updateOrderTotalPrice();
         validateTotalPrice();
     }
 
-    public void addItem(LineItem item) {
-        addItems(List.of(item));
-        change.addChange(new LineItemAddedEvent(UUID.randomUUID().toString(), 1, this));
-    }
-
     private void validateTotalPrice() {
-        if(Objects.isNull(this.totalPrice) || this.totalPrice.compareTo(BigDecimal.ZERO) <= 0) {
+        if(Objects.isNull(this.totalPrice) || this.totalPrice.compareTo(BigDecimal.ZERO) < 0) {
             throw new OrderAggregateException("Order's total price could not be null, zero or lower then zero !");
         }
         BigDecimal itemsTotal = this.items.stream().map(item -> {
@@ -58,24 +64,29 @@ public class OrderAggregate {
 
     private void validateLineItem(LineItem item) {
         if(!item.validateItemPrice()) {
-        throw new OrderAggregateException("Order with order id= " + orderId.getOrderId() + " item is not sufficient !");
+        throw new OrderAggregateException("Order with order id= " + orderId.getVal() + " item is not sufficient !");
         }
+    }
+
+    private void updateOrderTotalPrice() {
+        this.totalPrice = this.items.stream().map(LineItem::getSubTotalPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public void deliver() {
         if(!(this.status.equals(Status.DELIVERED))) {
             this.status = this.status.next();
-            change.addChange(new OrderDeliveredEvent(UUID.randomUUID().toString(), 1, this));
+            change.addChange(new OrderDeliveredEvent(this));
         } else {
-            throw new OrderAggregateException("Order with id= " + this.orderId.getOrderId() + " could not be delivered cause of already delivered !");
+            throw new OrderAggregateException("Order with id= " + this.orderId.getVal() + " could not be delivered cause of already delivered !");
         }
     }
 
     public void pay() {
         if(this.status.equals(Status.CREATED)) {
             this.status = this.status.next();
+            change.addChange(new OrderPaidEvent(this));
         } else {
-            throw new OrderAggregateException("Order with id= " + orderId.getOrderId() + " could not be paid cause of wrong state !");
+            throw new OrderAggregateException("Order with id= " + orderId.getVal() + " could not be paid cause of wrong state !");
         }
     }
 
@@ -99,4 +110,52 @@ public class OrderAggregate {
         return change;
     }
 
+    private OrderAggregate(Builder builder) {
+        orderId = builder.orderId;
+        change = builder.change;
+        totalPrice = builder.totalPrice;
+        items = builder.items;
+        status = builder.status;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private OrderId orderId;
+        private Change<OrderAggregate> change;
+        private BigDecimal totalPrice;
+        private List<LineItem> items;
+        private Status status;
+
+        public Builder orderId(OrderId val) {
+            this.orderId = val;
+            return this;
+        }
+
+        public Builder change(Change<OrderAggregate> change) {
+            this.change = change;
+            return this;
+        }
+
+        public Builder totalPrice(BigDecimal val) {
+            totalPrice = val;
+            return this;
+        }
+
+        public Builder items(List<LineItem> val) {
+            items = val;
+            return this;
+        }
+
+        public Builder status(Status val) {
+            status = val;
+            return this;
+        }
+
+        public OrderAggregate build() {
+            return new OrderAggregate(this);
+        }
+    }
 }

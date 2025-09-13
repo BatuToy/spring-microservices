@@ -20,5 +20,9 @@ public enum Status {
         }
     };
 
+    public static Status startProcess() {
+        return CREATED;
+    }
+
     public abstract Status next();
 }
