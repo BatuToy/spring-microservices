@@ -7,7 +7,6 @@ import java.util.UUID;
 public abstract class DomainEvent<T> {
 
     private final String id;
-
     private String payload;
 
     protected DomainEvent(T payload) {

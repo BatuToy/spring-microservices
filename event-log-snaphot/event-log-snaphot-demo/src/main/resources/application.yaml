@@ -1,4 +1,28 @@
 spring:
   application:
     name: Event-Log-Snapshot-Demo
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: event-store-user
+    password: event_store_pass
+    url: jdbc:postgresql://[::1]:5433/event-store-db
+    hikari:
+      maximum-pool-size: 20
+      connection-timeout: 5000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        show_sql: true
 
+server:
+  servlet:
+    context-path: "/api/v*"
+  port: 8181
+
+logging:
+  level:
+    org.hibernate.sql: DEBUG
