@@ -11,10 +11,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface OutboxRepository<T> extends JpaRepository<EventEntity<T>, UUID> {
+public interface OutboxRepository extends JpaRepository<EventEntity, UUID> {
 
-    @Override
-    Optional<EventEntity<T>> findById(UUID id);
+    @Query(value = """
+            SELECT *
+            FROm t_event AS e
+            WHERE e.event_id = :id             
+            """, nativeQuery = true)
+    Optional<EventEntity> findEventById(@Param(value = "id") UUID id);
 
     @Query(value = """
             SELECT *
@@ -37,6 +41,6 @@ public interface OutboxRepository<T> extends JpaRepository<EventEntity<T>, UUID>
             WHERE e.aggregate_id = :aggregateId
             AND e.version = :version
             """, nativeQuery = true)
-    Optional<T> findPayloadByAggregateAndVersion(@Param(value = "aggregateId") String aggregateId, @Param(value = "version") Integer version);
+    Optional<String> findPayloadByAggregateAndVersion(@Param(value = "aggregateId") String aggregateId, @Param(value = "version") Integer version);
 }
 

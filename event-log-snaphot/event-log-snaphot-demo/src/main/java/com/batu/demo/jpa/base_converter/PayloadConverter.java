@@ -8,6 +8,12 @@ import jakarta.persistence.Converter;
 @Converter(autoApply = true)
 public class PayloadConverter<T> implements AttributeConverter<T, String> {
 
+    private final TypeReference<T> ref;
+
+    public PayloadConverter(TypeReference<T> ref) {
+        this.ref = ref;
+    }
+
     @Override
     public String convertToDatabaseColumn(T t) {
         return ObjectMapperUtil.toString(t);
@@ -15,6 +21,6 @@ public class PayloadConverter<T> implements AttributeConverter<T, String> {
 
     @Override
     public T convertToEntityAttribute(String payloadString) {
-        return ObjectMapperUtil.toObject(payloadString, new TypeReference<>() {});
+        return ObjectMapperUtil.toObject(payloadString, ref);
     }
 }

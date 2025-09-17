@@ -1,8 +1,8 @@
 package com.batu.demo.dto;
 
-import com.batu.demo.aggregate.Change;
-import com.batu.demo.aggregate.OrderAggregate;
-import com.batu.demo.aggregate.Status;
+import com.batu.demo.domain.event.Change;
+import com.batu.demo.domain.aggregate.OrderAggregate;
+import com.batu.demo.domain.vo.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,10 +16,10 @@ import java.util.UUID;
 @Builder
 public class OrderDto {
 
-    private final UUID orderId;
-    private final List<OrderLineItemDto> items;
-    private final BigDecimal totalPrice;
-    private final Change<OrderAggregate> eventHistory;
-    private final Status orderStatus;
+    private UUID orderId;
+    private List<OrderLineItemDto> items;
+    private BigDecimal totalPrice;
+    private Change<OrderAggregate> eventHistory;
+    private Status orderStatus;
 
 }

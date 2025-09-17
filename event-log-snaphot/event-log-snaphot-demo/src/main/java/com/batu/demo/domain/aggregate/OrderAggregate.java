@@ -1,9 +1,12 @@
-package com.batu.demo.aggregate;
+package com.batu.demo.domain.aggregate;
 
-import com.batu.demo.event.LineItemAddedEvent;
-import com.batu.demo.event.OrderCreatedEvent;
-import com.batu.demo.event.OrderDeliveredEvent;
-import com.batu.demo.event.OrderPaidEvent;
+import com.batu.demo.domain.event.Change;
+import com.batu.demo.domain.vo.OrderId;
+import com.batu.demo.domain.vo.Status;
+import com.batu.demo.domain.event.LineItemAddedEvent;
+import com.batu.demo.domain.event.OrderCreatedEvent;
+import com.batu.demo.domain.event.OrderDeliveredEvent;
+import com.batu.demo.domain.event.OrderPaidEvent;
 import com.batu.demo.exception.OrderAggregateException;
 
 import java.math.BigDecimal;
@@ -27,12 +30,12 @@ public class OrderAggregate {
         this.totalPrice = totalPrice;
         this.status = Status.startProcess();
         this.change = new Change<>();
-        change.addChange(new OrderCreatedEvent(this.orderId.getVal().toString(), this, Change.initiateNewVersion()));
+        change.addChange(new OrderCreatedEvent(this.orderId.getVal().toString(), this));
     }
 
     public void addItem(LineItem item) {
         addItems(List.of(item));
-        this.change.addChange(new LineItemAddedEvent(this.orderId.getVal().toString(), this, Change.initiateNewVersion()));
+        this.change.addChange(new LineItemAddedEvent(this.orderId.getVal().toString(), this));
     }
 
     private void addItems(List<LineItem> items) {
@@ -75,7 +78,7 @@ public class OrderAggregate {
     public void deliver() {
         if(!(this.status.equals(Status.DELIVERED))) {
             this.status = this.status.next();
-            change.addChange(new OrderDeliveredEvent(this.orderId.getVal().toString(), this, Change.initiateNewVersion()));
+            change.addChange(new OrderDeliveredEvent(this.orderId.getVal().toString(), this));
         } else {
             throw new OrderAggregateException("Order with id= " + this.orderId.getVal() + " could not be delivered cause of already delivered !");
         }
@@ -84,7 +87,7 @@ public class OrderAggregate {
     public void pay() {
         if(this.status.equals(Status.CREATED)) {
             this.status = this.status.next();
-            change.addChange(new OrderPaidEvent(orderId.getVal().toString(), this, Change.initiateNewVersion()));
+            change.addChange(new OrderPaidEvent(orderId.getVal().toString(), this));
         } else {
             throw new OrderAggregateException("Order with id= " + orderId.getVal() + " could not be paid cause of wrong state !");
         }

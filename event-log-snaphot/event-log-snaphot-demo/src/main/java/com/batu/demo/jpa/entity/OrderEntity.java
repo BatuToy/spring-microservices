@@ -1,7 +1,7 @@
 package com.batu.demo.jpa.entity;
 
 
-import com.batu.demo.aggregate.Status;
+import com.batu.demo.domain.vo.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

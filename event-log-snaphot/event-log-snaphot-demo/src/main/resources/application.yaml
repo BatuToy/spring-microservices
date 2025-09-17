@@ -18,8 +18,8 @@ spring:
         format_sql: true
         show_sql: true
         cache:
-          use_second_level_cache: true
-          use_query_cache: true
+          use_second_level_cache: false
+          use_query_cache: false
 
 server:
   servlet:

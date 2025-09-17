@@ -1,4 +1,4 @@
-package com.batu.demo.aggregate;
+package com.batu.demo.domain.vo;
 
 public enum Status {
     CREATED {

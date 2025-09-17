@@ -1,4 +1,4 @@
-package com.batu.demo.aggregate;
+package com.batu.demo.domain.aggregate;
 
 import java.math.BigDecimal;
 import java.util.Objects;

@@ -1,29 +1,29 @@
-package com.batu.demo.event;
+package com.batu.demo.domain.event;
 
 import java.util.Objects;
 import java.util.UUID;
 
 public class EventId {
 
-    private final UUID id;
+    private final UUID val;
 
     public EventId(UUID id) {
-        this.id = id;
+        this.val = id;
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getVal() {
+        return val;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         EventId eventId = (EventId) o;
-        return Objects.equals(id, eventId.id);
+        return Objects.equals(val, eventId.val);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(val);
     }
 }

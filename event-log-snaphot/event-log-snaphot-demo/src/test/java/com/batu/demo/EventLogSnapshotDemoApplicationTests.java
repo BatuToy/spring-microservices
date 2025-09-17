@@ -1,8 +1,8 @@
 package com.batu.demo;
 
-import com.batu.demo.aggregate.LineItem;
-import com.batu.demo.aggregate.OrderAggregate;
-import com.batu.demo.aggregate.Status;
+import com.batu.demo.domain.aggregate.LineItem;
+import com.batu.demo.domain.aggregate.OrderAggregate;
+import com.batu.demo.domain.vo.Status;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

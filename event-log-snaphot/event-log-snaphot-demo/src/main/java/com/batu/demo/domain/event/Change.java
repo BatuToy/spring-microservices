@@ -1,8 +1,6 @@
-package com.batu.demo.aggregate;
+package com.batu.demo.domain.event;
 
-import com.batu.demo.event.DomainEvent;
 import com.batu.demo.exception.OrderAggregateException;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Objects;
@@ -22,12 +20,15 @@ public class Change<T> {
             if (Objects.isNull(this.changeMap)) {
                 this.changeMap = new WeakHashMap<>();
                 this.changeMap.put(version.get(), event);
+                event.setVersion(version.get());
             } else if (this.changeMap.isEmpty()) {
                 changeMap.put(version.get(), event);
+                event.setVersion(version.get());
                 version.set(version.get() + 1);
             } else {
+                this.changeMap.put(version.get() + 1, event);
                 version.set(version.get() + 1);
-                this.changeMap.put(version.get(), event);
+                event.setVersion(version.get());
             }
         } else {
             throw new OrderAggregateException("Adding changed event must not be a null value !");
@@ -48,10 +49,6 @@ public class Change<T> {
 
     public T processAggregate() {
         return changeMap.get(version.get() + 1).getPayload();
-    }
-
-    public static Integer initiateNewVersion() {
-        return version.get() + 1;
     }
 
 }

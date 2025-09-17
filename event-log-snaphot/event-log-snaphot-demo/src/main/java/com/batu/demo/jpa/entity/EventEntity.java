@@ -1,10 +1,14 @@
 package com.batu.demo.jpa.entity;
 
+import com.batu.demo.jpa.base_converter.OrderConverter;
 import com.batu.demo.jpa.base_converter.PayloadConverter;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import java.util.UUID;
 
@@ -16,9 +20,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-public class EventEntity<T> {
+@SuperBuilder
+@MappedSuperclass
+public abstract class EventEntity {
 
     // Multi-Aggregate Outbox Table Design
 
@@ -34,9 +38,5 @@ public class EventEntity<T> {
 
     @Column(name = "VERSION")
     private Integer version; // Version of the aggregates event flow
-
-    @Column(name = "PAYLOAD")
-    @Convert(converter = PayloadConverter.class)
-    private T payload; // Event's payload as a String json data
 }
 

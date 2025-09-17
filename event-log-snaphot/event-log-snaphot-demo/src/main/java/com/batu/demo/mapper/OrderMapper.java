@@ -1,15 +1,15 @@
 package com.batu.demo.mapper;
 
-import com.batu.demo.aggregate.LineItem;
-import com.batu.demo.aggregate.OrderAggregate;
-import com.batu.demo.aggregate.OrderId;
+import com.batu.demo.domain.aggregate.LineItem;
+import com.batu.demo.domain.aggregate.OrderAggregate;
+import com.batu.demo.domain.vo.OrderId;
 import com.batu.demo.dto.OrderDto;
 import com.batu.demo.dto.OrderLineItemDto;
 
 public final class OrderMapper {
 
     private OrderMapper() {
-        throw new UnsupportedOperationException("");
+        throw new UnsupportedOperationException("Could not reach this instance from outside of this class!");
     }
 
     public static OrderDto toDto(OrderAggregate order) {
@@ -29,7 +29,7 @@ public final class OrderMapper {
                 .build();
     }
 
-    public static OrderAggregate toDto(OrderDto order) {
+    public static OrderAggregate toDomain(OrderDto order) {
         return OrderAggregate.builder()
                 .orderId(new OrderId(order.getOrderId()))
                 .status(order.getOrderStatus())
