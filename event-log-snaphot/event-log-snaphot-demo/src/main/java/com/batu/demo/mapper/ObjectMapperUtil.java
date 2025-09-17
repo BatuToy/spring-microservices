@@ -1,6 +1,7 @@
 package com.batu.demo.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,19 +20,18 @@ public class ObjectMapperUtil {
         return om;
     }
 
-    public static <T> T toObject(String data, Class<T> clazz) {
+    public static <T> T toObject(String data, TypeReference<T> reference) {
         if(!StringUtils.hasLength(data)) {
             log.debug("Json parser must not be a null or empty value !");
             return null;
         }
         try {
-            return omFactory().readValue(data, clazz);
+            return omFactory().readValue(data, reference);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage(), e);
             throw new RuntimeException(e.getMessage());
         }
     }
-
     public static <T> String toString(T data)  {
         try {
             return omFactory().writeValueAsString(data);

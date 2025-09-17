@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS t_event;
+CREATE TABLE t_event (
+    EVENT_ID            UUID PRIMARY KEY UNIQUE,
+    AGGREGATE_ID        VARCHAR(75) NOT NULL,
+    VERSION             INTEGER NOT NULL,
+    EVENT_TYPE          VARCHAR(75) NOT NULL,
+    PAYLOAD             TEXT NOT NULL
+);
+CREATE TABLE t_order (
+    ORDER_ID            UUID PRIMARY KEY,
+    TOTAL_PRICE         NUMERIC(18,2) NOT NULL
+);

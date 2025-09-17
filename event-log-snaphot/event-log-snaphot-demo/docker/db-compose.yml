@@ -9,8 +9,6 @@ services:
     env_file:
       - ./postgres.env
     volumes:
-      - event-db-vol-data:/var/lib/postgresql/data/vol_data
-    network_mode: bridge
-
+      - event-db-vol-data:/var/lib/postgresql/vol_data
 volumes:
   event-db-vol-data:

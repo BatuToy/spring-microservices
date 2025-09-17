@@ -3,12 +3,9 @@ package com.batu.demo;
 import com.batu.demo.aggregate.LineItem;
 import com.batu.demo.aggregate.OrderAggregate;
 import com.batu.demo.aggregate.Status;
-import com.batu.demo.event.OrderCreatedEvent;
-import com.batu.demo.mapper.ObjectMapperUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.annotation.Order;
 
 import java.math.BigDecimal;
 
@@ -26,7 +23,7 @@ class EventLogSnapshotDemoApplicationTests {
         order.addItem(new LineItem("Apple Iphone 11 Pro", 1, BigDecimal.valueOf(55), BigDecimal.valueOf(55)));
         Assertions.assertEquals(order.getTotalPrice(), order.getItems().stream().map(LineItem::getSubTotalPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
         Assertions.assertEquals(Status.CREATED,
-                order.getChange().retrieveAggregateByVersion(1, OrderAggregate.class).getStatus());
+                order.getChange().retrieveAggregateByVersion(1).getStatus());
     }
 
     @Test
@@ -50,7 +47,7 @@ class EventLogSnapshotDemoApplicationTests {
         order.pay();
         order.deliver();
         // TODO= Fix the ObjectMapper default construct issue !
-        OrderAggregate emptyOrder = order.getChange().retrieveAggregateByVersion(1, OrderAggregate.class);
+        OrderAggregate emptyOrder = order.getChange().retrieveAggregateByVersion(1);
         Assertions.assertEquals(Status.CREATED, emptyOrder.getStatus());
         Assertions.assertEquals(Status.DELIVERED, order.getStatus());
     }
