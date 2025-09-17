@@ -32,6 +32,7 @@ public class ObjectMapperUtil {
             throw new RuntimeException(e.getMessage());
         }
     }
+
     public static <T> String toString(T data)  {
         try {
             return omFactory().writeValueAsString(data);

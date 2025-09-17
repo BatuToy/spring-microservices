@@ -27,12 +27,12 @@ public class OrderAggregate {
         this.totalPrice = totalPrice;
         this.status = Status.startProcess();
         this.change = new Change<>();
-        change.addChange(new OrderCreatedEvent(this));
+        change.addChange(new OrderCreatedEvent(this.orderId.getVal().toString(), this, Change.initiateNewVersion()));
     }
 
     public void addItem(LineItem item) {
         addItems(List.of(item));
-        change.addChange(new LineItemAddedEvent(this));
+        this.change.addChange(new LineItemAddedEvent(this.orderId.getVal().toString(), this, Change.initiateNewVersion()));
     }
 
     private void addItems(List<LineItem> items) {
@@ -75,7 +75,7 @@ public class OrderAggregate {
     public void deliver() {
         if(!(this.status.equals(Status.DELIVERED))) {
             this.status = this.status.next();
-            change.addChange(new OrderDeliveredEvent(this));
+            change.addChange(new OrderDeliveredEvent(this.orderId.getVal().toString(), this, Change.initiateNewVersion()));
         } else {
             throw new OrderAggregateException("Order with id= " + this.orderId.getVal() + " could not be delivered cause of already delivered !");
         }
@@ -84,7 +84,7 @@ public class OrderAggregate {
     public void pay() {
         if(this.status.equals(Status.CREATED)) {
             this.status = this.status.next();
-            change.addChange(new OrderPaidEvent(this));
+            change.addChange(new OrderPaidEvent(orderId.getVal().toString(), this, Change.initiateNewVersion()));
         } else {
             throw new OrderAggregateException("Order with id= " + orderId.getVal() + " could not be paid cause of wrong state !");
         }

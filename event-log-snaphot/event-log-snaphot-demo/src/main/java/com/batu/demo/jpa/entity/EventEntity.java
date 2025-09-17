@@ -18,7 +18,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-public class EventEntity {
+public class EventEntity<T> {
 
     // Multi-Aggregate Outbox Table Design
 
@@ -37,6 +37,6 @@ public class EventEntity {
 
     @Column(name = "PAYLOAD")
     @Convert(converter = PayloadConverter.class)
-    private String payload; // Event's payload as a String json data
+    private T payload; // Event's payload as a String json data
 }
 

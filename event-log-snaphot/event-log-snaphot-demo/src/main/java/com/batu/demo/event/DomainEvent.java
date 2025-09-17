@@ -2,21 +2,34 @@ package com.batu.demo.event;
 
 import java.util.UUID;
 
-public abstract class DomainEvent<T> {
+public class DomainEvent<T> {
 
-    private final String id;
-    private T payload;
+    private final EventId id;
+    private final String aggregateId;
+    private final T payload;
+    private final Integer version;
 
 
-    protected DomainEvent(T payload) {
-        this.id = UUID.randomUUID().toString();
+    public DomainEvent(String aggregateId, T payload, Integer version) {
+        this.id = new EventId(UUID.randomUUID());
+        this.payload = payload;
+        this.aggregateId = aggregateId;
+        this.version = version;
     }
 
-    public String getId() {
+    public EventId getId() {
         return id;
+    }
+
+    public String getAggregateId() {
+        return aggregateId;
     }
 
     public T getPayload() {
         return payload;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 }

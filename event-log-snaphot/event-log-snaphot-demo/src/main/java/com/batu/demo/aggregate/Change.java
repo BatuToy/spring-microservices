@@ -2,6 +2,7 @@ package com.batu.demo.aggregate;
 
 import com.batu.demo.event.DomainEvent;
 import com.batu.demo.exception.OrderAggregateException;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.Objects;
@@ -14,20 +15,18 @@ public class Change<T> {
     private static final Integer INITIAL_VERSION = 1;
 
     private WeakHashMap<Integer, DomainEvent<T>> changeMap; // For caching(GC) strategy !
-    private final ThreadLocal<Integer> version = new ThreadLocal<>();
+    private final static ThreadLocal<Integer> version = ThreadLocal.withInitial(() -> INITIAL_VERSION);
 
     public void addChange(DomainEvent<T> event) {
         if (Objects.nonNull(event)) {
             if (Objects.isNull(this.changeMap)) {
                 this.changeMap = new WeakHashMap<>();
-                version.set(INITIAL_VERSION);
                 this.changeMap.put(version.get(), event);
             } else if (this.changeMap.isEmpty()) {
-                version.set(INITIAL_VERSION);
                 changeMap.put(version.get(), event);
                 version.set(version.get() + 1);
             } else {
-                this.version.set(version.get() + 1);
+                version.set(version.get() + 1);
                 this.changeMap.put(version.get(), event);
             }
         } else {
@@ -44,11 +43,15 @@ public class Change<T> {
     }
 
     public T rollbackAggregate() {
-        return changeMap.get(this.version.get() - 1).getPayload();
+        return changeMap.get(version.get() - 1).getPayload();
     }
 
     public T processAggregate() {
-        return changeMap.get(this.version.get() + 1).getPayload();
+        return changeMap.get(version.get() + 1).getPayload();
+    }
+
+    public static Integer initiateNewVersion() {
+        return version.get() + 1;
     }
 
 }
