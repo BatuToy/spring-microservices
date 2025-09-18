@@ -1,4 +1,4 @@
-package com.batu.demo.mapper;
+package com.batu.demo.domain.mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

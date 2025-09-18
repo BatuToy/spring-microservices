@@ -1,14 +1,10 @@
-package com.batu.demo.jpa.entity;
+package com.batu.demo.persistence.entity;
 
-import com.batu.demo.jpa.base_converter.OrderConverter;
-import com.batu.demo.jpa.base_converter.PayloadConverter;
-import com.fasterxml.jackson.databind.node.JsonNodeType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.util.UUID;
 
@@ -17,12 +13,12 @@ import java.util.UUID;
         @Index(name = "idx_event_aggregate_id", columnList = "AGGREGATE_ID"),
         @Index(name = "idx_event_version", columnList = "VERSION")
 })
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 @SuperBuilder
 @MappedSuperclass
-public abstract class EventEntity {
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public abstract class AbstractOutboxEntity {
 
     // Multi-Aggregate Outbox Table Design
 
@@ -38,5 +34,10 @@ public abstract class EventEntity {
 
     @Column(name = "VERSION")
     private Integer version; // Version of the aggregates event flow
+
+    @Column(name = "OUTBOX_STATUS")
+    @Enumerated(value = EnumType.STRING)
+    @JdbcType(PostgreSQLEnumJdbcType.class)
+    private OutboxStatus status;
 }
 

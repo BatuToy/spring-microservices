@@ -7,7 +7,7 @@ import com.batu.demo.domain.event.LineItemAddedEvent;
 import com.batu.demo.domain.event.OrderCreatedEvent;
 import com.batu.demo.domain.event.OrderDeliveredEvent;
 import com.batu.demo.domain.event.OrderPaidEvent;
-import com.batu.demo.exception.OrderAggregateException;
+import com.batu.demo.domain.exception.OrderAggregateException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

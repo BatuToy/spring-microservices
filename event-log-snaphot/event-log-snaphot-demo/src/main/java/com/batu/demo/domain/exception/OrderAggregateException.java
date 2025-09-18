@@ -1,4 +1,4 @@
-package com.batu.demo.exception;
+package com.batu.demo.domain.exception;
 
 public class OrderAggregateException extends RuntimeException{
 

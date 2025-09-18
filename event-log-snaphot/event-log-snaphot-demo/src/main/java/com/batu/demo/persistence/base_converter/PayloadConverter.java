@@ -1,6 +1,6 @@
-package com.batu.demo.jpa.base_converter;
+package com.batu.demo.persistence.base_converter;
 
-import com.batu.demo.mapper.ObjectMapperUtil;
+import com.batu.demo.domain.mapper.ObjectMapperUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

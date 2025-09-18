@@ -1,4 +1,4 @@
-package com.batu.demo.dto;
+package com.batu.demo.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

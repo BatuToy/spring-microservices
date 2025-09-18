@@ -1,4 +1,4 @@
-package com.batu.demo.jpa.entity;
+package com.batu.demo.persistence.entity;
 
 
 import com.batu.demo.domain.vo.Status;

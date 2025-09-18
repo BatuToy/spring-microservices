@@ -1,10 +1,10 @@
-package com.batu.demo.mapper;
+package com.batu.demo.domain.mapper;
 
 import com.batu.demo.domain.aggregate.LineItem;
 import com.batu.demo.domain.aggregate.OrderAggregate;
 import com.batu.demo.domain.vo.OrderId;
-import com.batu.demo.dto.OrderDto;
-import com.batu.demo.dto.OrderLineItemDto;
+import com.batu.demo.domain.dto.OrderDto;
+import com.batu.demo.domain.dto.OrderLineItemDto;
 
 public final class OrderMapper {
 

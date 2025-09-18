@@ -1,4 +1,4 @@
-package com.batu.demo.dto;
+package com.batu.demo.domain.dto;
 
 import com.batu.demo.domain.event.Change;
 import com.batu.demo.domain.aggregate.OrderAggregate;
