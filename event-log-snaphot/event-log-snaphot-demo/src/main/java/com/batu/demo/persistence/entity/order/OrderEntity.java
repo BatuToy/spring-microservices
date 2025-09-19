@@ -1,4 +1,4 @@
-package com.batu.demo.persistence.entity;
+package com.batu.demo.persistence.entity.order;
 
 
 import com.batu.demo.domain.vo.Status;
@@ -16,6 +16,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+@NamedEntityGraph(name = "order.with.items",
+        attributeNodes = {
+        @NamedAttributeNode(value = "items")
+        })
 @Entity(name = "order")
 @Table(name = "t_order")
 @AllArgsConstructor

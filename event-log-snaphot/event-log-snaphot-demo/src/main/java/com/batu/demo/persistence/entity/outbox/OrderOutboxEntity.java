@@ -1,7 +1,8 @@
-package com.batu.demo.persistence.entity;
+package com.batu.demo.persistence.entity.outbox;
 
 import com.batu.demo.domain.dto.OrderDto;
-import com.batu.demo.persistence.base_converter.OrderConverter;
+import com.batu.demo.persistence.base_converter.OrderPayloadConverter;
+import com.batu.demo.persistence.entity.base.AbstractOutboxEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class OrderOutboxEntity extends AbstractOutboxEntity {
 
-    @Convert(converter = OrderConverter.class)
+    @Convert(converter = OrderPayloadConverter.class)
     @Column(name = "PAYLOAD", columnDefinition = "json")
     private OrderDto payload;
 

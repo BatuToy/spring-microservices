@@ -2,7 +2,7 @@ package com.batu.demo.domain.port;
 
 import com.batu.demo.domain.event.DomainEvent;
 import com.batu.demo.domain.event.EventId;
-import com.batu.demo.persistence.entity.OutboxStatus;
+import com.batu.demo.persistence.entity.outbox.OutboxStatus;
 
 import java.util.List;
 import java.util.Optional;

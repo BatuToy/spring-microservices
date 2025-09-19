@@ -4,8 +4,8 @@ import com.batu.demo.domain.aggregate.OrderAggregate;
 import com.batu.demo.domain.event.DomainEvent;
 import com.batu.demo.domain.event.EventId;
 import com.batu.demo.domain.port.OutboxJpaPort;
-import com.batu.demo.persistence.entity.OutboxStatus;
-import com.batu.demo.persistence.mapper.OrderDataMapper;
+import com.batu.demo.persistence.entity.outbox.OutboxStatus;
+import com.batu.demo.persistence.mapper.OrderOutboxDataMapper;
 import com.batu.demo.persistence.repo.OrderOutboxRepository;
 import com.batu.demo.domain.mapper.OrderMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,18 +22,18 @@ public class OrderOutboxRepositoryAdapter implements OutboxJpaPort<OrderAggregat
 
     @Override
     public Optional<DomainEvent<OrderAggregate>> retrieveEventByEventId(EventId eventId) {
-        return orderOutboxRepository.findEventById(eventId.getVal()).map(OrderDataMapper::toDomainEvent);
+        return orderOutboxRepository.findEventById(eventId.getVal()).map(OrderOutboxDataMapper::toDomainEvent);
     }
 
     @Override
     public Optional<DomainEvent<OrderAggregate>> retrieveEventByAggregateIdAndVersion(String aggregateId, Integer version) {
-        return orderOutboxRepository.findEventByAggregateAndVersion(aggregateId, version).map(OrderDataMapper::toDomainEvent);
+        return orderOutboxRepository.findEventByAggregateAndVersion(aggregateId, version).map(OrderOutboxDataMapper::toDomainEvent);
     }
 
     @Override
     public Optional<List<DomainEvent<OrderAggregate>>> retrieveEventsByAggregateId(String aggregateId) {
         return Optional.of(orderOutboxRepository.findByAggregateId(aggregateId).stream().flatMap(List::stream)
-                .map(OrderDataMapper::toDomainEvent).toList());
+                .map(OrderOutboxDataMapper::toDomainEvent).toList());
     }
 
     @Override
@@ -43,14 +43,14 @@ public class OrderOutboxRepositoryAdapter implements OutboxJpaPort<OrderAggregat
 
     @Override
     public void saveOutboxEvent(DomainEvent<OrderAggregate> domainEvent) {
-        orderOutboxRepository.save(OrderDataMapper.toEntity(domainEvent));
+        orderOutboxRepository.save(OrderOutboxDataMapper.toEntity(domainEvent));
     }
 
     @Override
     public Optional<List<DomainEvent<OrderAggregate>>> retrieveEventsByOutboxStatus(OutboxStatus status) {
         return Optional.of(orderOutboxRepository.findEventsByOutboxStatus(status.name()).stream()
                 .flatMap(List::stream)
-                .map(OrderDataMapper::toDomainEvent).toList());
+                .map(OrderOutboxDataMapper::toDomainEvent).toList());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class OrderOutboxRepositoryAdapter implements OutboxJpaPort<OrderAggregat
     @Override
     public void deleteAllOutboxMessages(List<DomainEvent<OrderAggregate>> events) {
         events.forEach(event ->
-                orderOutboxRepository.delete(OrderDataMapper.toEntity(event)));
+                orderOutboxRepository.delete(OrderOutboxDataMapper.toEntity(event)));
     }
 
 

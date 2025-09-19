@@ -1,7 +1,7 @@
 package com.batu.demo.persistence.repo;
 
 import com.batu.demo.domain.dto.OrderDto;
-import com.batu.demo.persistence.entity.OrderOutboxEntity;
+import com.batu.demo.persistence.entity.outbox.OrderOutboxEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

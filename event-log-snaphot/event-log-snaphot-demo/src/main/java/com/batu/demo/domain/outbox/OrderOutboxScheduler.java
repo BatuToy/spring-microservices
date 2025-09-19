@@ -4,7 +4,7 @@ import com.batu.demo.domain.aggregate.OrderAggregate;
 import com.batu.demo.domain.event.DomainEvent;
 import com.batu.demo.domain.event.EventId;
 import com.batu.demo.domain.outbox.helper.OrderOutboxHelper;
-import com.batu.demo.persistence.entity.OutboxStatus;
+import com.batu.demo.persistence.entity.outbox.OutboxStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class OrderOutboxScheduler {
 
     private final OrderOutboxHelper orderOutboxHelper;
 
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "59 * * * * *")
     void sendOrdersToRelevantTopics() {
         List<DomainEvent<OrderAggregate>> domainEvents = orderOutboxHelper.retrieveStartedOrderOutboxMessages();
         //domainEvents.forEach(event -> kafkaPublisher.publish(event, updateOutboxStatus(event.getId(), updateOutboxStatus)));

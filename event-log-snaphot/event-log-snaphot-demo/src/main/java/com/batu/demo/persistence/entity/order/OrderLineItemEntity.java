@@ -1,4 +1,4 @@
-package com.batu.demo.persistence.entity;
+package com.batu.demo.persistence.entity.order;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

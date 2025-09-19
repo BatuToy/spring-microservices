@@ -1,5 +1,6 @@
-package com.batu.demo.persistence.entity;
+package com.batu.demo.persistence.entity.base;
 
+import com.batu.demo.persistence.entity.outbox.OutboxStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -11,7 +12,6 @@ import java.util.UUID;
 @Entity(name = "event")
 @Table(name = "t_event", indexes = {
         @Index(name = "idx_event_aggregate_id", columnList = "AGGREGATE_ID"),
-        @Index(name = "idx_event_version", columnList = "VERSION")
 })
 @SuperBuilder
 @MappedSuperclass
@@ -23,7 +23,7 @@ public abstract class AbstractOutboxEntity {
     // Multi-Aggregate Outbox Table Design
 
     @Id
-    @Column(name = "EVENT_ID")
+    @Column(name = "OUTBOX_ID")
     private UUID id; // Primary Index for the table "t_event"
 
     @Column(name = "AGGREGATE_ID")

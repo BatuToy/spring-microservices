@@ -4,7 +4,7 @@ import com.batu.demo.domain.aggregate.OrderAggregate;
 import com.batu.demo.domain.event.DomainEvent;
 import com.batu.demo.domain.event.EventId;
 import com.batu.demo.domain.port.OutboxJpaPort;
-import com.batu.demo.persistence.entity.OutboxStatus;
+import com.batu.demo.persistence.entity.outbox.OutboxStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,7 +34,7 @@ public class OrderOutboxHelper {
 
     @Transactional(readOnly = true)
     public List<DomainEvent<OrderAggregate>> retrieveFinishedOrderOutboxMessages() {
-        Optional<List<DomainEvent<OrderAggregate>>> optOrderOutboxes = orderOutbox.retrieveEventsByOutboxStatus(OutboxStatus.FINISHED);
+        Optional<List<DomainEvent<OrderAggregate>>> optOrderOutboxes = orderOutbox.retrieveEventsByOutboxStatus(OutboxStatus.COMPLETED);
         if (optOrderOutboxes.isEmpty()) {
             logger.severe("An error occurred while retrieving the Order Outbox Messages (Finished) from persist store !");
             throw new RuntimeException("An error occurred while retrieving the Order Outbox Messages (Finished) from persist store !");
@@ -57,6 +57,7 @@ public class OrderOutboxHelper {
         orderOutbox.updateOutboxStatusOfEvent(eventId, status);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteAllOutboxMessages(List<DomainEvent<OrderAggregate>> events) {
         orderOutbox.deleteAllOutboxMessages(events);
     }

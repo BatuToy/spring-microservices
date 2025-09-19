@@ -1,8 +1,8 @@
-package com.batu.demo.persistence.entity;
+package com.batu.demo.persistence.entity.outbox;
 
 public enum OutboxStatus {
     STARTED("Outbox Message Saved In To Persistence Store !"),
-    FINISHED("Outbox Message Send To Relevant Topics Successfully !"),
+    COMPLETED("Outbox Message Send To Relevant Topics Successfully !"),
     FAILED("An Error Occurred While Sending The Outbox Message To Relevant Topics !");
 
     private final String description;
@@ -20,7 +20,7 @@ public enum OutboxStatus {
     }
 
     public static OutboxStatus failOutbox() {
-        return valueOf(OutboxStatus.class, "Failed");
+        return valueOf(OutboxStatus.class, "Completed");
     }
 
     public static OutboxStatus startOutbox() {

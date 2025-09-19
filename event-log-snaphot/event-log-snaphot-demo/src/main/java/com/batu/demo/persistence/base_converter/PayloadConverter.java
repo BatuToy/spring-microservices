@@ -6,7 +6,7 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter(autoApply = true)
-public class PayloadConverter<T> implements AttributeConverter<T, String> {
+public abstract class PayloadConverter<T> implements AttributeConverter<T, String> {
 
     private final TypeReference<T> ref;
 

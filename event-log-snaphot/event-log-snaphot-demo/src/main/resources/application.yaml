@@ -7,7 +7,7 @@ spring:
     password: event_store_pass
     url: jdbc:postgresql://[::1]:5433/event-store-db
     hikari:
-      maximum-pool-size: 20
+      maximum-pool-size: 10
       connection-timeout: 5000
   jpa:
     hibernate:
