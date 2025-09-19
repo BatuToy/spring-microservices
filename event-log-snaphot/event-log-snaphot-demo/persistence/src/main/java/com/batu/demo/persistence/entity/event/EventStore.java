@@ -39,4 +39,9 @@ public class EventStore {
 
     @Column(name = "EVENT_NAME")
     private String eventName;
+
+    @PrePersist
+    private void initializeId() {
+        this.id = UUID.randomUUID();
+    }
 }

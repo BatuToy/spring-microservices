@@ -51,4 +51,7 @@ public class Change<T> {
         return changeMap.get(version.get() + 1).getPayload();
     }
 
+    public T retrieveCurrentVersionOfAggregate() {
+        return this.changeMap.get(this.version.get()).getPayload();
+    }
 }

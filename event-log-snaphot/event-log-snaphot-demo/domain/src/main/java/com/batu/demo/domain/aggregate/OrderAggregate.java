@@ -34,22 +34,16 @@ public class OrderAggregate {
     }
 
     public void addItem(LineItem item) {
-        addItems(List.of(item));
-        this.change.addChange(new LineItemAddedEvent(this.orderId.getVal().toString(), this));
-    }
-
-    private void addItems(List<LineItem> items) {
-        if(Objects.isNull(items) || items.isEmpty()) {
-            throw new OrderAggregateException("Line items could not be null or empty !");
-        }
+        initializeLineItem(item);
         if(Objects.isNull(this.items) || this.items.isEmpty()) {
             this.items = new ArrayList<>();
-            this.items.addAll(items);
+            this.items.add(item);
         } else {
-            this.items.addAll(items);
+            this.items.add(item);
         }
         updateOrderTotalPrice();
         validateTotalPrice();
+        this.change.addChange(new LineItemAddedEvent(this.orderId.getVal().toString(), this));
     }
 
     private void validateTotalPrice() {
@@ -73,6 +67,12 @@ public class OrderAggregate {
 
     private void updateOrderTotalPrice() {
         this.totalPrice = this.items.stream().map(LineItem::getSubTotalPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private void initializeLineItem(LineItem item) {
+        long itemId;
+        itemId = this.items.isEmpty() ? 1 : this.items.get(this.items.size() -1).getId().getVal() + 1L;
+        item.initializeItem(orderId, itemId);
     }
 
     public void deliver() {

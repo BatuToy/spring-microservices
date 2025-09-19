@@ -30,26 +30,29 @@ class EventLogSnapshotDemoApplicationTests {
     void pay_order() {
         OrderAggregate order = new OrderAggregate();
         order.addItem(new LineItem("Xiaomi Poco F3", 2, BigDecimal.valueOf(30), BigDecimal.valueOf(60)));
+        OrderAggregate oneLineItemAddedOrder = order.getChange().retrieveCurrentVersionOfAggregate();
         order.addItem(new LineItem("Apple Iphone 11 Pro", 1, BigDecimal.valueOf(55), BigDecimal.valueOf(55)));
         order.pay();
-        Assertions.assertEquals(Status.PAID, order.getStatus());
-    }
-
-    @Test
-    void deliver_order() {
+        OrderAggregate paidOrder = order.getChange().retrieveCurrentVersionOfAggregate();
+        Assertions.assertEquals(1, oneLineItemAddedOrder.getItems().size());
+        Assertions.assertEquals(Status.PAID, paidOrder.getStatus());
     }
 
     @Test
     void rollback_to_empty_cart() {
         OrderAggregate order = new OrderAggregate();
+
         order.addItem(new LineItem("Xiaomi Poco F3", 2, BigDecimal.valueOf(30), BigDecimal.valueOf(60)));
         order.addItem(new LineItem("Apple Iphone 11 Pro", 1, BigDecimal.valueOf(55), BigDecimal.valueOf(55)));
-        order.pay();
-        order.deliver();
-        // TODO= Fix the ObjectMapper default construct issue !
+
+        order.pay(); // paid order
+        order.deliver(); // delivered order
+
+        OrderAggregate deliveredOrder = order.getChange().retrieveCurrentVersionOfAggregate();
         OrderAggregate emptyOrder = order.getChange().retrieveAggregateByVersion(1);
+
+        Assertions.assertEquals(Status.DELIVERED, deliveredOrder.getStatus());
         Assertions.assertEquals(Status.CREATED, emptyOrder.getStatus());
-        Assertions.assertEquals(Status.DELIVERED, order.getStatus());
     }
 
 }

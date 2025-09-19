@@ -29,8 +29,8 @@ public abstract class AbstractOutboxEntity {
     @Column(name = "AGGREGATE_ID")
     private String aggregateId; // Aggregates reference id !
 
-    @Column(name = "EVENT_TYPE")
-    private String eventType; //  Aggregate Event Type via 'OrderLineItemAddedEvent.class.getSimpleName();'
+    @Column(name = "EVENT_NAME")
+    private String eventName; //  Aggregate Event Type via 'OrderLineItemAddedEvent.class.getSimpleName();'
 
     @Column(name = "VERSION")
     private Integer version; // Version of the aggregates event flow

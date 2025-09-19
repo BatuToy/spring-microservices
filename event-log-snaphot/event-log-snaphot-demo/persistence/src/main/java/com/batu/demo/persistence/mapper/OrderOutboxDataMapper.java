@@ -24,7 +24,7 @@ public final class OrderOutboxDataMapper {
                 .id(domainEvent.getEventId().getVal())
                 .aggregateId(domainEvent.getAggregateId())
                 .payload(OrderMapper.toDto(domainEvent.getPayload()))
-                .eventType(domainEvent.getClass().getSimpleName())
+                .eventName(domainEvent.getClass().getSimpleName())
                 .version(domainEvent.getVersion())
                 .build();
     }
