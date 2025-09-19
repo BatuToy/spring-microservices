@@ -4,8 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-./docker/postgres.env
-./docker/event-db-vol-data
+/docker/postgres.env
 ### STS ###
 .apt_generated
 .classpath
