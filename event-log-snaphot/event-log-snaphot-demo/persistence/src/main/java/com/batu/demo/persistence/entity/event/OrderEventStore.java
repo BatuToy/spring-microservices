@@ -1,11 +1,9 @@
 package com.batu.demo.persistence.entity.event;
 
+import com.batu.demo.domain.dto.OrderDto;
 import com.batu.demo.persistence.base_converter.OrderPayloadConverter;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -15,11 +13,12 @@ import java.util.UUID;
         @Index(name = "idx_event_store_aggregate_id", columnList = "AGGREGATE_ID"),
         @Index(name = "idx_event_store_version", columnList = "VERSION")
 })
-@SuperBuilder
+@Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventStore {
+public class OrderEventStore {
 
     // Compensating and Process scenarios
 
@@ -32,7 +31,7 @@ public class EventStore {
 
     @Column(name = "PAYLOAD")
     @Convert(converter = OrderPayloadConverter.class)
-    private String payload;
+    private OrderDto payload;
 
     @Column(name = "VERSION")
     private Integer version;

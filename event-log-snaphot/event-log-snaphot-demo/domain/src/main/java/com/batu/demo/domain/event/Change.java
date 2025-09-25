@@ -4,12 +4,15 @@ import com.batu.demo.domain.exception.OrderAggregateException;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.WeakHashMap;
+import java.util.logging.Logger;
 
 // Aggregate private event diff store ! In-mem to Outbox
 
 public class Change<T> {
 
+    private static final Logger logger = Logger.getLogger(Change.class.getSimpleName());
     private static final Integer INITIAL_VERSION = 1;
 
     private WeakHashMap<Integer, DomainEvent<T>> changeMap; // For caching(GC) strategy !
@@ -47,11 +50,20 @@ public class Change<T> {
         return changeMap.get(version.get() - 1).getPayload();
     }
 
-    public T processAggregate() {
-        return changeMap.get(version.get() + 1).getPayload();
+    public Optional<T> processAggregate() {
+        if (this.changeMap.containsKey(this.version.get() + 1)) {
+            return Optional.of(changeMap.get(version.get() + 1).getPayload());
+        } else {
+            logger.severe("Aggregate's event map does not exist version =" + (this.version.get() + 1));
+            return Optional.empty();
+        }
     }
 
     public T retrieveCurrentVersionOfAggregate() {
         return this.changeMap.get(this.version.get()).getPayload();
+    }
+
+    public Integer getCurrentVersionNumber() {
+        return this.version.get();
     }
 }

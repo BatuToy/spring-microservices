@@ -33,7 +33,7 @@ public class OrderOutboxHelper {
     }
 
     @Transactional(readOnly = true)
-    public List<DomainEvent<OrderAggregate>> retrieveFinishedOrderOutboxMessages() {
+    public List<DomainEvent<OrderAggregate>> retrieveCompletedOutboxMessages() {
         Optional<List<DomainEvent<OrderAggregate>>> optOrderOutboxes = orderOutbox.retrieveEventsByOutboxStatus(OutboxStatus.COMPLETED);
         if (optOrderOutboxes.isEmpty()) {
             logger.severe("An error occurred while retrieving the Order Outbox Messages (Finished) from persist store !");

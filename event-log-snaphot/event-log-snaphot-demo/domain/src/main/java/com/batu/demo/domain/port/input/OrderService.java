@@ -4,8 +4,6 @@ import com.batu.demo.domain.aggregate.OrderAggregate;
 
 public interface OrderService {
 
-    void updateOrder(OrderAggregate orderAggregate);
-
     void initializeOrder();
 
 }

@@ -20,7 +20,7 @@ public class OrderOutboxCleaner {
 
     @Scheduled(cron = "@midnight")
     void cleanCompletedAndFailedOrderOutboxMessages() {
-        List<DomainEvent<OrderAggregate>> completedOutboxes = orderOutboxHelper.retrieveFinishedOrderOutboxMessages();
+        List<DomainEvent<OrderAggregate>> completedOutboxes = orderOutboxHelper.retrieveCompletedOutboxMessages();
         List<DomainEvent<OrderAggregate>> failedOutboxes = orderOutboxHelper.retrieveFailedOrderOutboxMessages();
         completedOutboxes.addAll(failedOutboxes);
         List<DomainEvent<OrderAggregate>> cleanOutboxMessages = completedOutboxes;
